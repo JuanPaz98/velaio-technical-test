@@ -1,0 +1,17 @@
+<ng-container *ngIf="config">
+    <div class="todo-item-container">
+        <div class="todo-item-header">
+            <h3>{{config.title}} - 10/10/2010</h3>
+        </div>
+        <div class="todo-item-content">
+            <ng-container *ngFor="let person of config.persons">
+                <p>{{person.name}}</p>
+                <p>{{person.age}}</p>
+                <ng-container *ngFor="let skill of person.skills">
+                    <p>{{skill.description}}</p>
+                </ng-container>
+            </ng-container>
+
+        </div>
+    </div>
+</ng-container>

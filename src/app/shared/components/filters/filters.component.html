@@ -1,0 +1,17 @@
+<div class="filter-container">
+    <div class="inputs-container">
+        <mat-form-field class="filter-input" appearance="outline">
+            <mat-label>Search your task!</mat-label>
+            <input matInput type="text" [(ngModel)]="searchCriteria.taskName">
+        </mat-form-field>
+
+        <mat-form-field class="filter-input-select" appearance="outline">
+            <mat-label>State</mat-label>
+            <mat-select [(value)]="searchCriteria.completed">
+                <mat-option value=true>Completed</mat-option>
+                <mat-option value=false>Incompleted</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button class="filter-button" (click)="onFilter()">Search</button>
+    </div>
+</div>

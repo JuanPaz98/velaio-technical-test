@@ -1,0 +1,28 @@
+.filter-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 0 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid #dadada;
+    margin-bottom: 1rem;
+}
+
+.inputs-container {
+    display: flex;
+    width: 100%;
+    padding-top: 20px;
+    gap: 1rem;
+}
+
+.filter-input {
+    width: 80%;
+}
+
+.filter-input-select {
+    width: 130px;
+}
+
+.filter-button {
+    height: 3.5rem;
+}
