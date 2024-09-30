@@ -27,8 +27,6 @@ export class FilterPipe implements PipeTransform {
       return matchesName && matchesStatus
     })
 
-    console.log(filteredItems)
-
     return filteredItems
   }
 

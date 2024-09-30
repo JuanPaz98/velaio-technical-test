@@ -8,8 +8,7 @@ import { Todo } from '../interfaces/todo.interface';
 })
 export class ApiConsumerService {
 
-  // private URLApi = 'https://velaio-data.onrender.com/todos'
-  private URLApi = 'http://localhost:3000/todos'
+  private URLApi = 'https://velaio-data.onrender.com/todos'
 
   constructor(private http: HttpClient) { }
 
