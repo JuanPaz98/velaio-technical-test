@@ -9,6 +9,7 @@ import { TodoItemComponent } from 'src/app/shared/components/todo-item/todo-item
 import { SearchCriteria } from 'src/app/shared/interfaces/search-criteria.interface';
 import { TodoVm } from 'src/app/shared/interfaces/todo-vm.interface';
 import { FilterPipe } from "../../shared/pipes/filter.pipe";
+import { TodoFormComponent } from "../../shared/components/todo-form/todo-form.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ import { FilterPipe } from "../../shared/pipes/filter.pipe";
     CommonModule,
     FiltersComponent,
     TodoItemComponent,
-    FilterPipe
+    FilterPipe,
+    TodoFormComponent
 ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
@@ -51,6 +53,13 @@ export class DashboardComponent implements OnInit {
     //   console.log(res);
     //   console.log(this.data);
     // })
+  }
+  
+  public onFormDataEmitter(event: any): void {
+    console.log(event);
+    this.apiConsumerService.createTodo(event).subscribe(resp => {
+      console.log('guardada', resp)
+    })
   }
 
   public onCompletedTaskEmitter(element: Todo) { 

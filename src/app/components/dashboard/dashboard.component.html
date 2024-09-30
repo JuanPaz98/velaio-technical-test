@@ -6,10 +6,11 @@
 
     <button>Add Todo +</button>
 
+    <todo-form (formDataEmitter)="onFormDataEmitter($event)"></todo-form>
+
     <ng-container *ngFor="let todo of data | filter: searchCriteria">
         <todo-item [config]="todo"></todo-item>
     </ng-container>
-
 
     
 </div>

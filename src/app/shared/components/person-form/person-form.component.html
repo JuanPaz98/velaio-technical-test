@@ -1,0 +1,18 @@
+<form [formGroup]="personForm">
+    <label for="task">Name</label>
+    <input type="text" name="name" formControlName="name">
+    
+    <label for="age">Age</label>
+    <input type="text" name="age" formControlName="age">
+    
+
+    <fieldset formArrayName="'skills'">
+        <ng-container *ngIf="personForm && personForm.controls">
+            <div *ngFor="let person of skills.controls; let i = index" [formGroupName]="i">
+                <skill-form (skillFormChanged)="onSkillsFormChanged($event, i)"></skill-form>
+            </div>
+        </ng-container>
+    </fieldset>
+
+    <button (click)="onAddSkill()">Add Skill</button>
+</form>

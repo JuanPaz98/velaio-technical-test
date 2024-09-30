@@ -1,0 +1,26 @@
+<form [formGroup]="todoForm">
+    <label for="title">Task</label>
+    <input type="text" name="title" formControlName="title">
+    
+    <label for="completed">Completed</label>
+    <input type="checkbox" name="completed" formControlName="completed">
+
+    <fieldset formArrayName="'persons">
+        <ng-container *ngIf="todoForm && todoForm.controls">
+            <div *ngFor="let person of persons.controls; let i = index" [formGroupName]="i">
+                <person-form (personFormChanged)="onPersonFormChanged($event, i)"></person-form>
+            </div>
+        </ng-container>
+        
+    </fieldset>
+
+    <button type="button" (click)="addPerson()">Add Person</button>
+
+    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+</form>
+
+
+
+<strong>form group value</strong>
+
+{{todoForm.value | json }}
