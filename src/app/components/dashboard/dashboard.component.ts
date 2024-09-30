@@ -43,17 +43,10 @@ export class DashboardComponent implements OnInit {
   }
   
   public onFormDataEmitter(event: any): void {
-    console.log(event);
     this.apiConsumerService.createTodo(event).subscribe(resp => {
-      console.log('guardada', resp)
+      console.log('saved', resp)
     })
   }
-
-  // public onCompletedTaskEmitter(element: Todo) { 
-  //   this.apiConsumerService.updateTodo(element.id, element).subscribe(res => {
-  //     console.log('updated', res);
-  //   })
-  // }
 
   public onDeletedTaskEmitter(id: number) {
     this.apiConsumerService.deleteTodo(id).subscribe(() => {

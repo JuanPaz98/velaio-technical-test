@@ -1,6 +1,11 @@
-<h3>Add Skills for Person</h3>
+<h2>Add Skills for Person</h2>
 
 <form [formGroup]="skillForm">
-    <label for="description">Skill</label>
-    <input type="text" name="description" formControlName="description">
+    <div class="input-wrapper">
+        <label for="description">Skill</label>
+        <input class="todo-form-input" type="text" name="description" formControlName="description">
+        <ng-container *ngIf="skillForm.get('description')?.errors">
+            <span class="error">this input is required and must be over 18 years old</span>
+        </ng-container>
+    </div>
 </form>

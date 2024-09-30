@@ -1,13 +1,19 @@
-<h2>Add Peaple to your task</h2>
+<h2>Add People to your task</h2>
 
 <form [formGroup]="personForm" class="person-form">
     <div class="input-wrapper">
         <label for="task">Name</label>
         <input  class="todo-form-input" type="text" name="name" formControlName="name">
+        <ng-container *ngIf="personForm.get('name')?.errors">
+            <span class="error">this input is required and must have more than 5 characteres</span>
+        </ng-container>
     </div>
     <div class="input-wrapper">
         <label for="age">Age</label>
-        <input class="todo-form-input" type="text" name="age" formControlName="age">
+        <input class="todo-form-input" type="number" name="age" formControlName="age">
+        <ng-container *ngIf="personForm.get('age')?.errors">
+            <span class="error">this input is required and must be over 18 years old</span>
+        </ng-container>
     </div>
     
 

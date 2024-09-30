@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, OnInit, Output, } from '@angular/core';
-import { ControlContainer, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, ControlContainer, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SkillFormComponent } from "../skill-form/skill-form.component";
 
 @Component({
@@ -31,10 +31,10 @@ export class PersonFormComponent implements OnInit{
 
   ngOnInit() {
     this.personForm = this.fb.group({
-      name: '',
-      age: '',
+      name: ['', [Validators.required, Validators.minLength(5)]],
+      age: ['', [Validators.required, this.ageValidator]],
       skills: this.fb.array([
-        this.fb.control('', [])
+        this.fb.control('', [this.minSkillsValidator])
       ]),
     });
 
@@ -53,5 +53,15 @@ export class PersonFormComponent implements OnInit{
 
   public onSkillsFormChanged(skillFormGroup: FormGroup<any>, index: number) {
     this.skills.controls[index].setValue(skillFormGroup.value)
+  }
+
+  public ageValidator(control: AbstractControl) {
+    const value = control.value;
+    return value && value >= 18 ? null : { underage: true };
+  }
+
+  public minSkillsValidator(control: AbstractControl) {
+    const skillsArray = control as FormArray;
+    return skillsArray.length > 0 ? null : { noSkills: true };
   }
 }
