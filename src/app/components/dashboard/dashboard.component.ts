@@ -10,6 +10,8 @@ import { SearchCriteria } from 'src/app/shared/interfaces/search-criteria.interf
 import { TodoVm } from 'src/app/shared/interfaces/todo-vm.interface';
 import { TodoFormComponent } from "../../shared/components/todo-form/todo-form.component";
 import { FilterPipe } from "../../shared/pipes/filter.pipe";
+import { MatDialog } from '@angular/material/dialog';
+import { SuccessMessageComponent } from 'src/app/shared/components/success-message/success-message.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,8 +35,10 @@ export class DashboardComponent implements OnInit {
   public searchCriteria!: SearchCriteria;
   public isFormExpanded = false;
   public toggleButtonLabel = 'Open Todo Form'
+
   
   constructor(
+    public dialog: MatDialog,
     private apiConsumerService: ApiConsumerService
   ) {}
 
@@ -46,6 +50,9 @@ export class DashboardComponent implements OnInit {
     this.apiConsumerService.createTodo(event).subscribe(resp => {
       console.log('saved', resp)
     })
+    this.isFormExpanded = false;
+    this.dialog.open(SuccessMessageComponent);
+    this.getData();
   }
 
   public onDeletedTaskEmitter(id: number) {
