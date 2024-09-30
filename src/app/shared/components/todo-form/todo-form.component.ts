@@ -19,6 +19,7 @@ export class TodoFormComponent implements OnInit{
   public todoForm!: FormGroup;
 
   @Output() formDataEmitter = new EventEmitter<any>();
+  @Output() cancelEmitter = new EventEmitter<any>()
 
   constructor(private fb: FormBuilder){}
 
@@ -46,5 +47,9 @@ export class TodoFormComponent implements OnInit{
 
   public submit() {
     this.formDataEmitter.emit(this.todoForm.value);
+  }
+
+  public cancel() {
+    this.cancelEmitter.emit();
   }
 }

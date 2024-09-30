@@ -6,8 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { PersonFormComponent } from './shared/components/person-form/person-form.component';
-import { SkillFormComponent } from './shared/components/skill-form/skill-form.component';
 
 @NgModule({
   declarations: [

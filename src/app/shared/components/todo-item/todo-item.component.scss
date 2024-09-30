@@ -5,3 +5,40 @@
     margin-bottom: 1rem;
     padding: 1rem;
 }
+
+.todo-item-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.todo-item-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.todo-item-subtitle {
+    margin-top: 1rem;
+}
+
+.todo-item-content {
+    background-color: rgb(202, 202, 202);
+    margin: 1rem 0;
+    border-radius: 10px;
+    padding: 1rem;
+    
+}
+
+.todo-item {
+    display: flex;
+}
+
+.person-details {
+    width: 50%;
+}
+
+.skills-list {
+    display: flex;
+    gap: 0.5rem
+}

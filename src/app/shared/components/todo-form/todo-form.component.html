@@ -1,26 +1,29 @@
-<form [formGroup]="todoForm">
-    <label for="title">Task</label>
-    <input type="text" name="title" formControlName="title">
-    
-    <label for="completed">Completed</label>
-    <input type="checkbox" name="completed" formControlName="completed">
+<h3>Add a New Todo</h3>
+<form [formGroup]="todoForm" class="todo-form">
+    <div class="input-row">
+        <div class="input-wrapper">
+            <label for="title">Task</label>
+            <input class="todo-form-input" type="text" name="title" formControlName="title">
+        </div>
+        <div class="checkbox-wrapper">
+            <label for="completed">Completed</label>
+            <input type="checkbox" name="completed" formControlName="completed">
+        </div>
+   </div>
 
-    <fieldset formArrayName="'persons">
-        <ng-container *ngIf="todoForm && todoForm.controls">
-            <div *ngFor="let person of persons.controls; let i = index" [formGroupName]="i">
-                <person-form (personFormChanged)="onPersonFormChanged($event, i)"></person-form>
-            </div>
-        </ng-container>
-        
-    </fieldset>
+   <div class="nested-form">
+       <fieldset formArrayName="'persons">
+           <ng-container *ngIf="todoForm && todoForm.controls">
+               <div *ngFor="let person of persons.controls; let i = index" [formGroupName]="i">
+                   <person-form (personFormChanged)="onPersonFormChanged($event, i)"></person-form>
+               </div>
+           </ng-container>
+       </fieldset>
+   </div>
 
-    <button type="button" (click)="addPerson()">Add Person</button>
-
-    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+    <button class="button-add-person" (click)="addPerson()">Add Person</button>
 </form>
-
-
-
-<strong>form group value</strong>
-
-{{todoForm.value | json }}
+<div class="buttons-container">
+    <button class="button-submit" (click)="submit()">Submit</button>
+    <button class="button-cancel" (click)="cancel()">Cancel</button>
+</div>

@@ -1,12 +1,17 @@
-<form [formGroup]="personForm">
-    <label for="task">Name</label>
-    <input type="text" name="name" formControlName="name">
-    
-    <label for="age">Age</label>
-    <input type="text" name="age" formControlName="age">
+<h2>Add Peaple to your task</h2>
+
+<form [formGroup]="personForm" class="person-form">
+    <div class="input-wrapper">
+        <label for="task">Name</label>
+        <input  class="todo-form-input" type="text" name="name" formControlName="name">
+    </div>
+    <div class="input-wrapper">
+        <label for="age">Age</label>
+        <input class="todo-form-input" type="text" name="age" formControlName="age">
+    </div>
     
 
-    <fieldset formArrayName="'skills'">
+    <fieldset formArrayName="'skills'" class="skills-form">
         <ng-container *ngIf="personForm && personForm.controls">
             <div *ngFor="let person of skills.controls; let i = index" [formGroupName]="i">
                 <skill-form (skillFormChanged)="onSkillsFormChanged($event, i)"></skill-form>
@@ -14,5 +19,5 @@
         </ng-container>
     </fieldset>
 
-    <button (click)="onAddSkill()">Add Skill</button>
+    <button class="button-add-skill" (click)="onAddSkill()">Add Skill</button>
 </form>

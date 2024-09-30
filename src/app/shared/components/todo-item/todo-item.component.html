@@ -1,17 +1,30 @@
 <ng-container *ngIf="config">
     <div class="todo-item-container">
         <div class="todo-item-header">
-            <h3>{{config.title}} - 10/10/2010</h3>
+            <span class="todo-item-title">{{config.title}}</span>
+            <ng-container *ngIf="!config.completed">
+                <mat-checkbox class="example-margin" (change)="onChecked($event)">Complete</mat-checkbox>
+            </ng-container>
+            <ng-container *ngIf="config.completed">
+                <span>Todo Completed!</span>
+            </ng-container>
         </div>
+        <h3 class="todo-item-subtitle">People</h3>
         <div class="todo-item-content">
             <ng-container *ngFor="let person of config.persons">
-                <p>{{person.name}}</p>
-                <p>{{person.age}}</p>
-                <ng-container *ngFor="let skill of person.skills">
-                    <p>{{skill.description}}</p>
-                </ng-container>
+                <div class="todo-item">
+                    <div class="person-details">
+                        <span>{{person.name}}</span> - <span>{{person.age}} years</span>
+                    </div>
+                    <div class="skills-list">
+                        <span>Skills:</span>
+                        <ng-container *ngFor="let skill of person.skills">
+                            <span>{{skill.description}}, </span>
+                        </ng-container>
+                    </div>
+                </div>
+                <hr>
             </ng-container>
-
         </div>
     </div>
 </ng-container>

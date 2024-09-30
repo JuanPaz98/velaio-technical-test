@@ -1,16 +1,21 @@
 <div class="container">
     <h3>Todo App</h3>
     <filters (filtersChanged)="onFiltersChanged($event)"></filters>
+
+    <button class="add-todo-buton" (click)="openForm()" >{{toggleButtonLabel}}</button>
     
-    <p>list Elements</p>
-
-    <button>Add Todo +</button>
-
-    <todo-form (formDataEmitter)="onFormDataEmitter($event)"></todo-form>
-
-    <ng-container *ngFor="let todo of data | filter: searchCriteria">
-        <todo-item [config]="todo"></todo-item>
+    <ng-container *ngIf="isFormExpanded">
+        <div class="form-container" [ngClass]="{'expanded': isFormExpanded }">
+            <todo-form 
+                (formDataEmitter)="onFormDataEmitter($event)"
+                (cancelEmitter)="onCancelEmitter($event)"
+            ></todo-form>
+        </div>
     </ng-container>
 
-    
+    <h2>Todo List</h2>
+
+    <ng-container *ngFor="let todo of data | filter: searchCriteria">
+        <todo-item [config]="todo" (checkedEmitter)="onCompleteTaskEmitter($event, todo)"></todo-item>
+    </ng-container>
 </div>

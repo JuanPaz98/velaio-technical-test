@@ -8,8 +8,8 @@ import { FiltersComponent } from 'src/app/shared/components/filters/filters.comp
 import { TodoItemComponent } from 'src/app/shared/components/todo-item/todo-item.component';
 import { SearchCriteria } from 'src/app/shared/interfaces/search-criteria.interface';
 import { TodoVm } from 'src/app/shared/interfaces/todo-vm.interface';
-import { FilterPipe } from "../../shared/pipes/filter.pipe";
 import { TodoFormComponent } from "../../shared/components/todo-form/todo-form.component";
+import { FilterPipe } from "../../shared/pipes/filter.pipe";
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +21,7 @@ import { TodoFormComponent } from "../../shared/components/todo-form/todo-form.c
     FiltersComponent,
     TodoItemComponent,
     FilterPipe,
-    TodoFormComponent
+    TodoFormComponent,
 ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
@@ -30,29 +30,16 @@ export class DashboardComponent implements OnInit {
 
   public data: Todo[] = [];
   public tableConfig!: TodoVm[];
-  public searchCriteria!: SearchCriteria
+  public searchCriteria!: SearchCriteria;
+  public isFormExpanded = false;
+  public toggleButtonLabel = 'Open Todo Form'
   
-  constructor(private apiConsumerService: ApiConsumerService) {}
+  constructor(
+    private apiConsumerService: ApiConsumerService
+  ) {}
 
   ngOnInit(): void {
     this.getData();
-  }
-
-  public completeTask() {
-    // this.completed = true;
-  }
-
-  public sendData() {
-    // const data: Todo = {
-    //   title:'fdsafdasfda',
-    //   completed: false,
-    //   userId: 1
-    // }
-
-    // this.apiConsumerService.createTodo(data).subscribe(res => {
-    //   console.log(res);
-    //   console.log(this.data);
-    // })
   }
   
   public onFormDataEmitter(event: any): void {
@@ -62,11 +49,11 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  public onCompletedTaskEmitter(element: Todo) { 
-    this.apiConsumerService.updateTodo(element.id, element).subscribe(res => {
-      console.log('updated', res);
-    })
-  }
+  // public onCompletedTaskEmitter(element: Todo) { 
+  //   this.apiConsumerService.updateTodo(element.id, element).subscribe(res => {
+  //     console.log('updated', res);
+  //   })
+  // }
 
   public onDeletedTaskEmitter(id: number) {
     this.apiConsumerService.deleteTodo(id).subscribe(() => {
@@ -77,6 +64,24 @@ export class DashboardComponent implements OnInit {
 
   public onFiltersChanged(event: SearchCriteria) {
     this.searchCriteria = {...event}
+  }
+
+  public openForm() {
+    this.isFormExpanded 
+    ? this.toggleButtonLabel = 'Open Todo Form'
+    : this.toggleButtonLabel = 'Close Todo Form';
+    this.isFormExpanded = !this.isFormExpanded;
+  }
+
+  public onCancelEmitter(event: any) {
+    this.isFormExpanded = false;
+  }
+
+  public onCompleteTaskEmitter(event: boolean, element: Todo) {
+    element.completed = event
+    this.apiConsumerService.updateTodo(element.id, element).subscribe(res => {
+      console.log('updated', res);
+    })
   }
 
   private getData() {
